@@ -1,5 +1,10 @@
-const getAll = () => {
-  // DO YOUR MAGIC
+// ===== IMPORTS =====
+const db = require("../../data/db-config")
+
+const getAll = async () => {
+  const allAccounts = await db("accounts")
+    .select("name", "budget")
+  return allAccounts
 }
 
 const getById = id => {

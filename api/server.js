@@ -1,7 +1,12 @@
-const express = require("express");
+// ===== IMPORTS =====
+const express = require("express")
+const accountsRouter = require("./accounts/accounts-router")
 
-const server = express();
+// ===== INSTANCE OF EXPRESS =====
+const server = express()
 
-server.use(express.json());
+// ===== MIDDLEWARE =====
+server.use(express.json())
+server.use("/api/accounts", accountsRouter)
 
-module.exports = server;
+module.exports = server
