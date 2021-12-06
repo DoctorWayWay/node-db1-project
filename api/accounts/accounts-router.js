@@ -1,11 +1,11 @@
 // ===== IMPORTS =====
 const router = require('express').Router()
 const Accounts = require("./accounts-model")
-// const {
-//   checkAccountPayload,
-//   checkAccountNameUnique,
-//   checkAccountId,
-// } = require("./accounts-middleware")
+const {
+  // checkAccountPayload,
+  // checkAccountNameUnique,
+  checkAccountId,
+} = require("./accounts-middleware")
 
 router.get('/', async (req, res, next) => {
   try {
@@ -16,8 +16,14 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:id', (req, res, next) => {
-  // DO YOUR MAGIC
+router.get('/:id', checkAccountId, async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const account = await Accounts.getById(id)
+    res.status(200).json(account)
+  } catch (err) {
+    next(err)
+  }
 })
 
 router.post('/', (req, res, next) => {
