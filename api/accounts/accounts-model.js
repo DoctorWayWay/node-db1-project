@@ -14,8 +14,11 @@ const getById = async id => {
   return account
 }
 
-const create = account => {
-  // DO YOUR MAGIC
+const create = async account => {
+  const [accountID] = await db("accounts")
+    .insert(account)
+  const newAccount = await getById(accountID)
+  return newAccount
 }
 
 const updateById = (id, account) => {
